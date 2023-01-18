@@ -42,12 +42,15 @@ Orale di Laboratorio
 ## Formula di bayes
 
 $$ Formula \ di \ Bayes:$$
+
 $$ P(Hi|E) = \frac{P(E|Hi)*P(Hi)}{P(E)} $$
+
 $$ Con: P(E)=\sum_{i=0}^{N}{P(E|Hi)*P(Hi)} $$
 
 La formula è ricavata sempicemente, data la definizione di probabilità condizionata ed il teorema della probabilità composta, il tutto portato al caso in cui, essendo presenti più eventi, la combinazione totale sia una sommatoria:
 
 $$ Per \ definizione \ di \ probabilità \ combinata: \ P(Hi|E) = \frac{P(E\cap Hi)}{P(E)} $$ 
+
 $$ Per \ il \ teorema \ della \ probabilità \ composta: \ P(E \cap Hi)=P(E|Hi)*P(Hi) $$
 
 Ora non resta che dire che, se la probabilità complessiva che avvenga E sia la sommatoria di più probabilità, ognuna di esse data dalla probabilità composta di un evento *Hi-esimo*, ed abbiamo ottenuto la Formula di Bayes.
