@@ -8,7 +8,7 @@ Orale di Laboratorio
 
 * [Sensori](#sensori)
 * [Teorema di Nyquist](#teorema-di-nyquist)
-* [Campionamenti differenti della stessa grandezza](#campionamenti-differenti-della-stessa-grandezza)
+* [Discrepanza](#discrepanza-tra-misure-della-stessa-um)
 * [Propagazione delle incertezze (anche binomiale)](#propagazione-delle-incertezze-anche-binomiale)
 * [Distribuzioni multivariate](#distribuzioni-multivariate)
 * [Descrivere la probabilità](#descrivere-la-probabilità)
@@ -92,9 +92,14 @@ Immagine sopra:
 Esempi di effetti di aliasing.
 
 
-# Campionamenti differenti della stessa grandezza
+# Discrepanza tra misure della stessa u.m.
 
+Date due misure dello stesso valore, la discrepanza è la differenza tra di esse.
+Date due misure, `X` ed `Y`, con relativi errori `sigmaX` e `sigmaY`, le misure sono compatibili, ovvero hanno *discrepanza non significativa* se:
 
+$$ max|X+sigmaX, Y+sigmaY| \geq min|X-sigmaX, Y-sigmaY| $$
+
+Lo stesso procedimento può essere applicato anche per misure appurate, o per misure il cui sigma è ottenuto per propagazione degli errori.
 
 # Propagazione delle incertezze (anche binomiale)
 
