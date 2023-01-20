@@ -58,7 +58,7 @@ Il DAQ (Amplificazione + Digitalizzazione) permette di selezionare un valore di 
 #### Digitalizzazione
 L'`ADC` trasforma il segnale da d.d.p. in binario.
 L'`ADC` è caratterizzato dal numero di bit assegnati alla conversione di ciascun segnale ricevuto.
-Un `ADC` a `x bit` divide il segnale in `2^(x)` livelli.
+Un `ADC` a `x bit` divide il segnale in $2^{x}$ livelli.
 
 #### Portata
 La portata è il range di valori accettati a seguito dell'elaborazione del segnale da parte dell'`ADC`.
@@ -69,7 +69,7 @@ $$ f_{amp} * Y_{min} > ADC_{min} $$
 
 $$ f_{amp} * Y_{max} \leq ADC_{max} $$
 
-Ricordando che `Y = f(x)` è il valore di d.d.p. riportato dal sensore e `f amp` il fattore di amplificazione
+Ricordando che `Y = f(x)` è il valore di d.d.p. riportato dal sensore e $f_{amp}$ il fattore di amplificazione
 
 
 # Teorema di Nyquist
@@ -95,9 +95,9 @@ Esempi di effetti di aliasing.
 # Discrepanza tra misure della stessa u.m.
 
 Date due misure dello stesso valore, la discrepanza è la differenza tra di esse.
-Date due misure, `X` ed `Y`, con relativi errori `sigmaX` e `sigmaY`, le misure sono compatibili, ovvero hanno *discrepanza non significativa* se:
+Date due misure, `X` ed `Y`, con relativi errori $\sigma_{x}$ e $\sigma_{y}$, le misure sono compatibili, ovvero hanno *discrepanza non significativa* se:
 
-$$ max|X+sigmaX, Y+sigmaY| \geq min|X-sigmaX, Y-sigmaY| $$
+$$ max|X+$\sigma_{x}$, Y+\sigma_{y}| \geq min|X-$\sigma_{x}$, Y-\sigma_{y}| $$
 
 Lo stesso procedimento può essere applicato anche per misure appurate, o per misure il cui sigma è ottenuto per propagazione degli errori.
 
@@ -106,7 +106,7 @@ Lo stesso procedimento può essere applicato anche per misure appurate, o per mi
 ## Prime approssimazioni
 
 Per la propagazione delle incertezze si può passare per diverse approssimazioni, nel Taylor spiegate in ordine.
-Come prima approssimazione possiamo considerare il valore `Z` ottenuto dalla somma di altri due come appartenente al range [`Z-(sigmaX+sigmaY)`; `Z+(sigmaX+sigmaY)`], e perciò l'incertezza come la somma delle incertezze.
+Come prima approssimazione possiamo considerare il valore `Z` ottenuto dalla somma di altri due come appartenente al range [$Z-(\sigma_{x}+\sigma_{y}); Z+(\sigma_{x}+\sigma_{y})$], e perciò l'incertezza come la somma delle incertezze.
 
 $$ Z = X \pm Y ; \ \sigma_{Z} = \sigma_{X} + \sigma_{Y} $$
 
@@ -140,32 +140,32 @@ Detto cio, suddividiamo il problema in `4` casi distinti:
 
 $$ q = x + A $$
 
-con A fissato e senza incertezza, ed `x` distribuito normalmente attorno ad un valore vero `X`, con una larghezza `sigmaX`.
+con A fissato e senza incertezza, ed `x` distribuito normalmente attorno ad un valore vero `X`, con una larghezza $\sigma_{x}$.
 La probabilità di ottenere un qualunque valore `x` sarà:
 
 $$ P(x) \propto G_{X,\sigma}(x)dx \ proporzionale \ a \ e^{\frac{-(x-X)^{2}}{2\sigma^2}} $$
 
 $$ q = x + A \rarr x = q - A \rarr e^{\frac{-(q-A-X)^{2}}{2\sigma^2}} = e^{\frac{-(x-(X+A))^{2}}{2\sigma^2}} $$
 
-da cui, per la forma della Gaussiana, essendo ```sigmaQ = sigmaX```, l'errore rimane invariato in `q`.
+da cui, per la forma della Gaussiana, essendo $ \sigma_{q} = \sigma_{x} $, l'errore rimane invariato in `q`.
 
 2. *Grandezza misurata moltiplicata per una costante numerica*
 
 $$ q = x*B $$
 
-con B fissato e senza incertezza, ed `x` distribuito normalmente attorno ad un valore vero `X`, con una larghezza `sigmaX`.
+con B fissato e senza incertezza, ed `x` distribuito normalmente attorno ad un valore vero `X`, con una larghezza $\sigma_{x}$.
 Seguendo un processo simile al 1., possiamo dire che la probabilità di ottenere un valore `q` sarà proporzionale a:
 
 $$ P(q) \propto e^{\frac{-(\frac{q}{B}-X)^{2}}{2\sigma^2}} = e^{\frac{-(q-BX)^{2}}{2B^{2}\sigma^2}} $$
 
-ovvero, secondo la forma della Gaussiana, i valori di `q` saranno distribuiti normalmente attorno ad un valore medio `q=B` e con larghezza `B*sigmaX`.
+ovvero, secondo la forma della Gaussiana, i valori di `q` saranno distribuiti normalmente attorno ad un valore medio `q=B` e con larghezza `B`$*\sigma_{x}$.
 Da cui l'incertezza su `q` è `B` volte quella in `x`
 
 3. *Somma di due grandezze misurate*
 
 $$ q = x + y $$
 
-con sia `x` che `y` indipendenti e distribuiti secondo due rispettive distribuzioni normali con medie `X` ed `Y` e larghezze `sigmaX` e `sigmaY`.
+con sia `x` che `y` indipendenti e distribuiti secondo due rispettive distribuzioni normali con medie `X` ed `Y` e larghezze $\sigma_{x}$ e $\sigma_{y}$.
 Avremo che le probabilità di ottenere un `x` ed un `y` saranno proporzionali alle seguenti:
 
 $$ P(x) \propto e^{\frac{-(x-X)^{2}}{2\sigma_{x}^2}} $$
@@ -187,7 +187,7 @@ $$ \frac{x^2}{A} + \frac{y^2}{B} = \frac{Bx^2 + Ay^2}{AB} = \frac{(A+B)B*x^2 + (
 
 $$ = \frac{AB(x^2+2xy+y^2) + B^2x^2 -2ABxy +A^2y^2}{AB(A+B)} = \frac{AB(x+y)^2 + (Bx - Ay)^2}{AB(A+B)} = \frac{(x+y)^2}{A+B} + \frac{(Bx-Ay)^2}{AB(A+B)} $$
 
-Sostituendo secondo l'identità appena dimostrata la somma di `x^2/sigmaX^2 + y^2/sigmaY^2` otteniamo:
+Sostituendo secondo l'identità appena dimostrata la somma di $\frac{x^2}{\sigma_{x}^2} + \frac{y^2}{\sigma_{y}^2}$ otteniamo:
 
 $$ P(x,y) \propto exp(-\frac{(x+y)^2}{2(\sigma_{x}^2+\sigma_{y}^2)} -\frac{z^2}{2}) $$
 
@@ -208,7 +208,7 @@ Se `X` ed `Y` sono diversi da `0` abbiamo che:
 
 $$ x+y = (x-X)+(y-Y)+(X+Y) $$
 
-i termini `x-X` ed `y-Y` sono centrati in `0` con larghezza `sigmaX` e `sigmaY`, come ottenuto in 1, perciò la loro somma, come appena dimostrato, è distribuita uniformemente con larghezza `sigmaX+Y` in `0`.
+i termini `x-X` ed `y-Y` sono centrati in `0` con larghezza $\sigma_{x}$ e $\sigma_{y}$, come ottenuto in 1, perciò la loro somma, come appena dimostrato, è distribuita uniformemente con larghezza $\sigma_{x+y}$ in `0`.
 Il termine `X+Y` è un valore fisso senza errore, da per cui, come secondo il punto 1., sposta solamente la media in `X+Y`, senza influire sulla larghezza della distribuzione. Da cui:
 
 $$ q = x + y \ ; \ \sigma_{q} = \sqrt{\sigma_{x}^2 + \sigma_{y}^2} $$
@@ -216,14 +216,14 @@ $$ q = x + y \ ; \ \sigma_{q} = \sqrt{\sigma_{x}^2 + \sigma_{y}^2} $$
 4. *Caso generale*
 
 Supponendo di avere una `q` ottenuta da un `x` ed un `y`, non come semplice somma ma come qualunque tipo di funzione.
-Ipotizzando di avere `sigmaX` e `sigmaY` sufficientemente piccole da poter fare un'approssimazione lineare della funzione `q`, otteniamo:
+Ipotizzando di avere $\sigma_{x}$ e $\sigma_{y}$ sufficientemente piccole da poter fare un'approssimazione lineare della funzione `q`, otteniamo:
 
 $$ q(x,y) \approx q(X,Y) + \frac{\partial{q}}{\partial{x}}(x-X) + \frac{\partial{q}}{\partial{y}}(y-Y)  $$
 
 l'approssimazione può essere detta valida in quanto essendo normalmente distribuiti, `x` ed `y` appaiono significativamente solo se relativamente vicini a `X` o `Y`.
 Adesso, analizzando la distribuzione di `q(x,y)`, possiamo osservare che è composta dalla somma di tre termini:
 1. `q(X,Y)`, che essendo un valore fissato sposta solamente la media, senza influire sulla larghezza
-2. la derivata parziale di `q` (un valore fisso in X), moltiplicata per `(x-X)` ha distribuzione normale attorno allo zero con larghezza pari a `derivata di q in x * sigmaX`
+2. la derivata parziale di `q` (un valore fisso in X), moltiplicata per `(x-X)` ha distribuzione normale attorno allo zero con larghezza pari a "derivata di q in x * $\sigma_{x}$"
 3. analoga a 2.
 Sommando i tre componenti di `q(x,y)`, come visto nei punti 1.-4. otteniamo una distribuzione normale di centro e larghezza seguenti:
 
@@ -242,7 +242,15 @@ Al fine di trattare come indipendenti le due variabili abbiamo però la necessit
 
 # Covarianza (distribuzione bivariata)
 
-guarda slide settima settimana per riscrivere
+Data una funzione multivariata, `f(x,y)`, dalla formula della propagazione delle incertezze (comunque sarà riportata la dimostrazione a seguito) possiamo ricavare che la [**varianza**](#formula-della-varianza) di `f(x,y)` sarà:
+
+$$ \sigma_{f(x,y)}^2 = (\frac{\partial{q}}{\partial{x}}\sigma_{x})^2 + (\frac{\partial{q}}{\partial{y}}\sigma_{y})^2 + 2(\frac{\partial{q}}{\partial{x}}\frac{\partial{q}}{\partial{y}})\sigma_{xy} $$
+
+Con $\sigma_{xy}$ come valore di **covarianza**, ovvero:
+
+$$ \sigma_{xy} = \frac{1}{N} \sum_{i}(x_{i}-\bar{x})(y_{i}-\bar{y}) $$
+
+completare con la dimostrazione del Taylor
 
 # Coefficiente di correlazione lineare
 
