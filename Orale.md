@@ -143,7 +143,82 @@ $$ q = x + A $$
 con A fissato e senza incertezza, ed `x` distribuito normalmente attorno ad un valore vero `X`, con una larghezza `sigmaX`.
 La probabilità di ottenere un qualunque valore `x` sarà:
 
-$$ P(x) = G_{X,\sigma}(x)dx \ proporzionale \ a \ e^{\frac{-(x-X)^{2}}{2\sigma^2}} $$
+$$ P(x) \propto G_{X,\sigma}(x)dx \ proporzionale \ a \ e^{\frac{-(x-X)^{2}}{2\sigma^2}} $$
+
+$$ q = x + A \rarr x = q - A \rarr e^{\frac{-(q-A-X)^{2}}{2\sigma^2}} = e^{\frac{-(x-(X+A))^{2}}{2\sigma^2}} $$
+
+da cui, per la forma della Gaussiana, essendo ```sigmaQ = sigmaX```, l'errore rimane invariato in `q`.
+
+2. *Grandezza misurata moltiplicata per una costante numerica*
+
+$$ q = x*B $$
+
+con B fissato e senza incertezza, ed `x` distribuito normalmente attorno ad un valore vero `X`, con una larghezza `sigmaX`.
+Seguendo un processo simile al 1., possiamo dire che la probabilità di ottenere un valore `q` sarà proporzionale a:
+
+$$ P(q) \propto e^{\frac{-(\frac{q}{B}-X)^{2}}{2\sigma^2}} = e^{\frac{-(q-BX)^{2}}{2B^{2}\sigma^2}} $$
+
+ovvero, secondo la forma della Gaussiana, i valori di `q` saranno distribuiti normalmente attorno ad un valore medio `q=B` e con larghezza `B*sigmaX`.
+Da cui l'incertezza su `q` è `B` volte quella in `x`
+
+3. *Somma di due grandezze misurate*
+
+$$ q = x + y $$
+
+con sia `x` che `y` indipendenti e distribuiti secondo due rispettive distribuzioni normali con medie `X` ed `Y` e larghezze `sigmaX` e `sigmaY`.
+Avremo che le probabilità di ottenere un `x` ed un `y` saranno proporzionali alle seguenti:
+
+$$ P(x) \propto e^{\frac{-(x-X)^{2}}{2\sigma_{x}^2}} $$
+
+$$ P(y) \propto e^{\frac{-(y-Y)^{2}}{2\sigma_{y}^2}} $$
+
+Essendo `x` ed `y` indipendenti la probabilità di ottenere un `x` ed un `y` dati sarà il prodotto delle due probabilità.
+Per facilitare la dimostrazione svolgiamo i calcoli con `X` ed `Y` uguali a `0`.
+
+$$ P(x,y) \propto exp(-\frac{1}{2}*(\frac{x^2}{\sigma_{x}^2} + \frac{x^2}{\sigma_{y}^2})) $$
+
+Secondo l'identità qui sotto dimostrata:
+
+$$ \frac{x^2}{A} + \frac{y^2}{B} = \frac{(x+y)^2}{A+B} + \frac{(Bx-Ay)^2}{AB(A+B)} = \frac{(x+y)^2}{A+B}+z^2 $$
+
+(ponendo z^2 al posto del secondo termine). DIMOSTRAZIONE IDENTITÀ:
+
+$$ \frac{x^2}{A} + \frac{y^2}{B} = \frac{Bx^2 + Ay^2}{AB} = \frac{(A+B)B*x^2 + (A+B)A*y^2}{AB(A+B)} = \frac{(AB + B^2)x^2 + (AB + A^2)y^2}{AB(A+B)} = \frac{ABx^2 + B^2x^2 + ABy^2 + A^2y^2 +2ABxy -2ABxy}{AB(A+B)} =  $$
+
+$$ = \frac{AB(x^2+2xy+y^2) + B^2x^2 -2ABxy +A^2y^2}{AB(A+B)} = \frac{AB(x+y)^2 + (Bx - Ay)^2}{AB(A+B)} = \frac{(x+y)^2}{A+B} + \frac{(Bx-Ay)^2}{AB(A+B)} $$
+
+Sostituendo secondo l'identità appena dimostrata la somma di `x^2/sigmaX^2 + y^2/sigmaY^2` otteniamo:
+
+$$ P(x,y) \propto exp(-\frac{(x+y)^2}{2(\sigma_{x}^2+\sigma_{y}^2)} -\frac{z^2}{2}) $$
+
+che però può essere considerata come la probabilità di ottenere valori di `x + y` e `z`, e riscritta come:
+
+$$ P(x+y,z) \propto exp(-\frac{(x+y)^2}{2(\sigma_{x}^2+\sigma_{y}^2)}) exp(-\frac{z^2}{2}) $$
+
+per ottenere una probabilità di `x + y` a prescindere da `z` si integra su `z`:
+
+$$ \int_{-\infty}^{+\infty} P(x+y,z)\ dx = P(x+y)*\sqrt{2\pi}  $$
+
+Da cui i valori di `x+y` sono distribuiti normalmente con larghezza:
+
+$$ \sigma_{x+y} = \sqrt{\sigma_{x}^2 + \sigma_{y}^2} $$
+
+che è la stima dell'errore che avevamo preventivato come somma in quadratura.
+Se `X` ed `Y` sono diversi da `0` abbiamo che:
+
+$$ x+y = (x-X)+(y-Y)+(X+Y) $$
+
+i termini `x-X` ed `y-Y` sono centrati in `0` con larghezza `sigmaX` e `sigmaY`, come ottenuto in 1, perciò la loro somma, come appena dimostrato, è distribuita uniformemente con larghezza `sigmaX+Y` in `0`.
+Il termine `X+Y` è un valore fisso senza errore, da per cui, come secondo il punto 1., sposta solamente la media in `X+Y`, senza influire sulla larghezza della distribuzione. Da cui:
+
+$$ q = x + y \ ; \ \sigma_{q} = \sqrt{\sigma_{x}^2 + \sigma_{y}^2} $$
+
+4. *Caso generale*
+
+Supponendo di avere una `q` ottenuta da un `x` ed un `y`, non come semplice somma ma come qualunque tipo di funzione.
+
+
+
 
 # Distribuzioni multivariate
 
