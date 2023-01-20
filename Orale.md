@@ -11,12 +11,12 @@ Orale di Laboratorio
 * [Discrepanza](#discrepanza-tra-misure-della-stessa-um)
 * [Propagazione delle incertezze (anche binomiale)](#propagazione-delle-incertezze-anche-binomiale)
 * [Distribuzioni multivariate](#distribuzioni-multivariate)
+* [Covarianza (distribuzione bivariata)](#covarianza-distribuzione-bivariata)
 * [Descrivere la probabilità](#descrivere-la-probabilità)
 * [Probabilità di somma e intersezione di due eventi](#probabilità-di-somma-e-intersezione-di-due-eventi)
 * [Formula di bayes](#formula-di-bayes)
 * [Regressione lineare(tutti i casi)](#regressione-linearetutti-i-casi)
 * [Coefficiente di correlazione lineare](#coefficiente-di-correlazione-lineare)
-* [Covarianza (distribuzione bivariata)](#covarianza-distribuzione-bivariata)
 * [Gaussiana con criterio di massima verosimiglianza](#gaussiana-con-criterio-di-massima-verosimiglianza)
 * [Errore sulla media e miglior stima (massima verosimiglianza)](#errore-sulla-media-e-miglior-stima-massima-verosimiglianza)
 * [Formula della varianza](#formula-della-varianza)
@@ -216,11 +216,41 @@ $$ q = x + y \ ; \ \sigma_{q} = \sqrt{\sigma_{x}^2 + \sigma_{y}^2} $$
 4. *Caso generale*
 
 Supponendo di avere una `q` ottenuta da un `x` ed un `y`, non come semplice somma ma come qualunque tipo di funzione.
+Ipotizzando di avere `sigmaX` e `sigmaY` sufficientemente piccole da poter fare un'approssimazione lineare della funzione `q`, otteniamo:
 
+$$ q(x,y) \approx q(X,Y) + \frac{\partial{q}}{\partial{x}}(x-X) + \frac{\partial{q}}{\partial{y}}(y-Y)  $$
 
+l'approssimazione può essere detta valida in quanto essendo normalmente distribuiti, `x` ed `y` appaiono significativamente solo se relativamente vicini a `X` o `Y`.
+Adesso, analizzando la distribuzione di `q(x,y)`, possiamo osservare che è composta dalla somma di tre termini:
+1. `q(X,Y)`, che essendo un valore fissato sposta solamente la media, senza influire sulla larghezza
+2. la derivata parziale di `q` (un valore fisso in X), moltiplicata per `(x-X)` ha distribuzione normale attorno allo zero con larghezza pari a `derivata di q in x * sigmaX`
+3. analoga a 2.
+Sommando i tre componenti di `q(x,y)`, come visto nei punti 1.-4. otteniamo una distribuzione normale di centro e larghezza seguenti:
 
+$$ q(X,Y) \ ; \ \sigma_{q} = \sqrt{(\frac{\partial{q}}{\partial{x}}\sigma_{x})^2 + (\frac{\partial{q}}{\partial{y}}\sigma_{y})^2} $$
+
+**Questa sopra è la formula generale per il calcolo della propagazione delle incertezze**
 
 # Distribuzioni multivariate
+
+Funzioni dipendenti da più di una variabile casuale sono dette *multivariate*.
+Nel corso di Laboratorio di Meccanica e Termodinamica ci si è concentrati sulle funzioni dipendenti da **due** variabili casuali, dette anche *bivariate*.
+Per funzioni bivariate è possibile disporre i dati ottenuti in un grafico bidimensionale, con lungo ogni asse una variabile casuale, detto **scatter plot**, o **grafico di dispersione**, ed estrapolarne un grafico "tridimensionale", più accuratamente un istogramma bidimensionale, detto **LEGO plot**.
+Il LEGO plot rappresenta sulla terza dimensione il numero di eventi per ogni coordinata degli altri due assi.
+Analogamente per il caso monodimensionale, un istogramma bidimensionale i cui bin tendono ad un numero infinito permette la definizione di una funzione di distribuzione di probabilità (PDF bidimensionale)
+Al fine di trattare come indipendenti le due variabili abbiamo però la necessità di uno strumento che ci permetta di quantificare la correlazione tra le due. Questo sarà detto covarianza, e definito nel prossimo paragrafo.
+
+# Covarianza (distribuzione bivariata)
+
+guarda slide settima settimana per riscrivere
+
+# Coefficiente di correlazione lineare
+
+guarda slide ottava settimana per riscrivere
+
+# Metodo del rigetto
+
+guarda slide ottava settimana per riscrivere
 
 # Descrivere la probabilità
 
@@ -243,13 +273,10 @@ $$ Per \ il \ teorema \ della \ probabilità \ composta: \ P(E \cap Hi)=P(E|Hi)*
 Ora non resta che dire che, se la probabilità complessiva che avvenga E sia la sommatoria di più probabilità, ognuna di esse data dalla probabilità composta di un evento *Hi-esimo*, ed abbiamo ottenuto la Formula di Bayes.
 
 # Regressione lineare(tutti i casi)
-# Coefficiente di correlazione lineare
-# Covarianza (distribuzione bivariata)
 # Gaussiana con criterio di massima verosimiglianza
 # Errore sulla media e miglior stima (massima verosimiglianza)
 # Formula della varianza
 # Compatibilità tra due misure(+media pesata)
-# Metodo del rigetto
 # Distribuzione binomiale (contatori di particelle)
 # Distribuzione di poisson
 # Poissoniana come limite della binomiale
