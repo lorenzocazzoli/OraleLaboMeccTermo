@@ -103,6 +103,8 @@ Lo stesso procedimento può essere applicato anche per misure appurate, o per mi
 
 # Propagazione delle incertezze (anche binomiale)
 
+## Prime approssimazioni
+
 Per la propagazione delle incertezze si può passare per diverse approssimazioni, nel Taylor spiegate in ordine.
 Come prima approssimazione possiamo considerare il valore `Z` ottenuto dalla somma di altri due come appartenente al range [`Z-(sigmaX+sigmaY)`; `Z+(sigmaX+sigmaY)`], e perciò l'incertezza come la somma delle incertezze.
 
@@ -116,7 +118,32 @@ Queste formule ci permettono di ricavare una formula per `Z` ottenuta come prodo
 
 $$ Z = c * X^{\alpha} * Y^{\beta} * W^{\gamma} ; \frac{\sigma_{Z}}{Z} = |\alpha|*\frac{\sigma_{X}}{X} + |\beta|*\frac{\sigma_{Y}}{Y} + |\gamma|*\frac{\sigma_{W}}{W} $$
 
+## Somma in quadratura
+
+### Esposizione
+
 Ma le formule di cui sopra sono in fin dei conti approssimazioni per ottenere il valore dell'errore *massimo*, non del più probabile. Per ottenere l'errore più *probabile*, invece, si usa un altro processo, adesso esposto e poi giustificato.
+
+$$ Z = X + Y ; \ \sigma_{Z} = \sqrt{\sigma_{X}^2 + \sigma_{Y}^2} $$
+
+Questa è la **somma in quadratura**, e rappresenta più precisamente l'errore più probabile ottenuto dalla somma di misure.
+Perché la somma in quadratura dovrebbe essere più precisamente in grado di rappresentare l'errore più probabile?
+Perché, se sia `X` che `Y` sono misure *indipendenti* e dotate di sole incertezze *casuali*, si ha una probabilità del 50% di avere una *sovrastima* di `X` sia associata ad una *sottostima* di `Y`. Nel caso invece le misure di `X` ed `Y` fossero correlate in qualche modo (effettuate con lo stesso strumento, o sono correlate da qualunque tipo di fattore), sarebbe probabile che ad una *sovrastima* di `X` sia associata una *sovrastima* di `Y`, e perciò l'errore sarebbe più simile a quello descritto nel paragrafo precedente.
+Di seguito la dimostrazione matematica di quanto appena detto:
+
+### Dimostrazione
+
+La dimostrazione richiede la comprensione della [probabilità](#descrivere-la-probabilità) e della funzione di distribuzione di probabilità standard, la [Gaussiana](#gaussiana-con-criterio-di-massima-verosimiglianza).
+Detto cio, suddividiamo il problema in `4` casi distinti:
+
+1. *Grandezza misurata con somma di costante numerica*
+
+$$ q = x + A $$
+
+con A fissato e senza incertezza, ed `x` distribuito normalmente attorno ad un valore vero `X`, con una larghezza `sigmaX`.
+La probabilità di ottenere un qualunque valore `x` sarà:
+
+$$ P(x) = G_{X,\sigma}(x)dx \ proporzionale \ a \ e^{\frac{-(x-X)^{2}}{2\sigma^2}} $$
 
 # Distribuzioni multivariate
 
