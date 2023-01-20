@@ -103,6 +103,21 @@ Lo stesso procedimento può essere applicato anche per misure appurate, o per mi
 
 # Propagazione delle incertezze (anche binomiale)
 
+Per la propagazione delle incertezze si può passare per diverse approssimazioni, nel Taylor spiegate in ordine.
+Come prima approssimazione possiamo considerare il valore `Z` ottenuto dalla somma di altri due come appartenente al range [`Z-(sigmaX+sigmaY)`; `Z+(sigmaX+sigmaY)`], e perciò l'incertezza come la somma delle incertezze.
+
+$$ Z = X \pm Y ; \ \sigma_{Z} = \sigma_{X} + \sigma_{Y} $$
+
+Mentre per valori `Z` ottenuti per prodotto di altre misure si utilizza l'incertezza relativa, secondo la formula:
+
+$$ Z = X * Y ; \ \frac{\sigma_{Z}}{Z} = \frac{\sigma_{X}}{X} + \frac{\sigma_{Y}}{Y}  $$
+
+Queste formule ci permettono di ricavare una formula per `Z` ottenuta come prodotto di fattori elevati ad un esponente:
+
+$$ Z = c * X^{\alpha} * Y^{\beta} * W^{\gamma} ; \frac{\sigma_{Z}}{Z} = |\alpha|*\frac{\sigma_{X}}{X} + |\beta|*\frac{\sigma_{Y}}{Y} + |\gamma|*\frac{\sigma_{W}}{W} $$
+
+Ma le formule di cui sopra sono in fin dei conti approssimazioni per ottenere il valore dell'errore *massimo*, non del più probabile. Per ottenere l'errore più *probabile*, invece, si usa un altro processo, adesso esposto e poi giustificato.
+
 # Distribuzioni multivariate
 
 # Descrivere la probabilità
