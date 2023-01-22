@@ -15,7 +15,7 @@ Orale di Laboratorio
 * [Descrivere la probabilità](#descrivere-la-probabilità)
 * [Probabilità di somma e intersezione di due eventi](#probabilità-di-somma-e-intersezione-di-due-eventi)
 * [Formula di bayes](#formula-di-bayes)
-* [Regressione lineare(tutti i casi)](#regressione-linearetutti-i-casi)
+* [Regressione lineare(tutti i casi)](#regressione-lineare-tutti-i-casi)
 * [Coefficiente di correlazione lineare](#coefficiente-di-correlazione-lineare)
 * [Gaussiana con criterio di massima verosimiglianza](#gaussiana-con-criterio-di-massima-verosimiglianza)
 * [Errore sulla media e miglior stima (massima verosimiglianza)](#errore-sulla-media-e-miglior-stima-massima-verosimiglianza)
@@ -344,7 +344,9 @@ Questa definizione empirica non è logicamente assicurata in quanto niente forza
 
 # Probabilità di somma e intersezione di due eventi
 
-Dati due eventi A e B 
+Dati due eventi A e B, dotati ognuno di una probabilità di verificarsi, dette P(A) e P(B), è possibile calcolare la probabilità che si verifichi una qualunque combinazione degli eventi A e B, secondo le formule di unione ed intersezione.
+
+
 
 # Formula di bayes
 
@@ -362,8 +364,109 @@ $$ Per \ il \ teorema \ della \ probabilità \ composta: \ P(E \cap Hi)=P(E|Hi)*
 
 Ora non resta che dire che, se la probabilità complessiva che avvenga E sia la sommatoria di più probabilità, ognuna di esse data dalla probabilità composta di un evento *Hi-esimo*, ed abbiamo ottenuto la Formula di Bayes.
 
-# Regressione lineare(tutti i casi)
+# Regressione lineare (tutti i casi)
+
+Dato un insieme di valori `x` ed `y`, considerati tali che
+1. Gli errori su x siano trascurabili
+2. Le grandezze $y_{i}$ siano estratte da popolazioini Gaussiane
+3. Gli errori sulle y, $\sigma_{y}$, siano tutti uguali
+4. Le x e le y siano legate da una correlazione lineare di tipo "$y = A + Bx$"
+
+Quali dovrebbero essere le migliori stime di A e B?
+Applicando il [metodo di massima verosomiglianza](#gaussiana-con-criterio-di-massima-verosimiglianza) possiamo ottenere le formule per calcolare A e B, ovvero:
+
+$$ A = \frac{\sum x_{i}^2 \sum y_{i} - \sum x_{i} \sum x_{i} y_{i}}{\Delta} = ordinata \ all'origine$$
+
+$$ B = \frac{N\sum x_{i}y_{i} - \sum x_{i} \sum y_{i}}{\Delta} =\ coefficiente \ angolare$$
+
+$$ \Delta = N\sum x_{i}^2 -(\sum x_{i})^2 $$
+
+Inoltre otteniamo che le incertezze su A e B sono pari a:
+
+$$ \sigma_{A} = \sigma_{y}\sqrt{\frac{\sum x_{i}^2}{\Delta}} \ \ \ ; \ \ \  \sigma_{B} = \sigma_{y}\sqrt{\frac{N}{\Delta}} $$
+
+Se $\sigma_{y}$ è ignota può essere stimata come:
+
+$$ \sigma_{y} = \sqrt{\frac{1}{N-2}\sum_{i}^{N} (y_{i}-A-Bx_{i})^2} $$
+
+Se i valori di $\sigma_{y}$ variano, è possibile ottenere i risultati di A, B ed i loro errori semplicemente aggiungendo il peso $w_{i}$ ad ogni i-esimo elemento delle sommatorie.
+
+$$ w_{i} = \frac{1}{\sigma_{y_{i}}^2} \ \ da \ cui \ \ \sum x_{i} \rarr \sum w_{i} x_{i}, \ \ \sum x_{i}y_{i} \rarr \sum w_{i}x_{i}y_{i}  $$
+
+$$ ed \ in \ particolare \ \Delta = \sum w_{i}\sum w_{i}x_{i}^2 -(\sum w_{i}x_{i})^2 $$
+
+## Dimostrazione del risultato
+
+Al fine di ottenere A e B, dobbiamo considerare che le y sono distribuite normalmente, quindi secondo una distribuzione Gaussiana. Le A e B che meglio si approssimano ai nostri dati sono quelle che massimizzano la probabilità di ottenere risultati come quelli del campione ottenuto, e perciò che minimizzano il quadrato all'esponente della formula della Gaussiana. Tale metodo è anche detto dei minimi quadrati.
+
+Se chiamiamo $y_{i} = A + Bx_{i}$ il valore vero della misura i-esima delle y, la probabilità di ottenere il valore misurato $y_{i}$ sarà:
+
+$$ P_{A,B}(y_{i}) \propto \frac{1}{\sigma_{y}} e^{-(y_{i}-A-Bx_{i})^2/2\sigma_{y}^2} $$
+
+Da cui la probabilità di ottenere le N misure $y_{1},...,y_{N} $ sarà:
+
+$$ P_{A,B}(y_{i},...,y_{n})=P_{A,B}(y_{1})*P_{A,B}(y_{2})*...*P_{A,B}(y_{N}), \ \ perciò: $$
+
+$$ P_{A,B}(y_{i},...,y_{n}) \propto \frac{1}{\sigma_{y}^N} e^{-\chi^2/2}, \ \ dato: $$
+
+$$ \chi^2 = \sum_{1}^{N} \frac{(y_{i}-A-Bx_{i})^2}{\sigma_{y}^2} $$
+
+Per ottenere la massima probabilità dell'evento dovremo minimizzare la somma dei quadrati ($\chi^2$), perciò differenziamo $\chi^2$ per A e B e poniamo le derivate =0.
+
+$$ \frac{\partial{\chi^2}}{\partial{A}} = \frac{-2}{\sigma_{y}^2}\sum(y_{i}-A-Bx_{i}) = 0 $$
+
+$$ \frac{\partial{\chi^2}}{\partial{B}} = \frac{-2}{\sigma_{y}^2}\sum x_{i}(y_{i}-A-Bx_{i}) = 0 $$
+
+Separando gli elementi della parentesi per ottenere più sommatorie facilmente gestibili otteniamo due equazioni in A e B, da cui ricavarne i valori ($\Delta$ è posto per abbreviare le formule singole):
+
+$$ AN + B\sum x_{i} = \sum y_{i} \rarr A = \frac{\sum x_{i}^2 \sum y_{i} - \sum x_{i} \sum x_{i} y_{i}}{\Delta}$$
+
+$$ A \sum x_{i} + B \sum x_{i}^2 = \sum x_{i}y_{i} \rarr B = \frac{N\sum x_{i}y_{i} - \sum x_{i} \sum y_{i}}{\Delta} $$
+
+Gli errori in A e B sono ottenuti per [propagazione degli errori](#propagazione-delle-incertezze-anche-binomiale) secondo `y`.
+
+Lo stesso procedimento di base può essere applicato anche ad altre correlazioni simili, per ottenere i paramentri più appropriati:
+
+1. **Retta passante per l'origine**
+
+$$ \chi^2 = \sum \frac{-(y_{i}-Bx_{i})^2}{\sigma_{y}^2} \rarr \frac{\partial{\chi^2}}{\partial{B}} = \frac{-2}{\sigma_{y}^2}\sum x_{i}(y_{i}-Bx_{i}) = 0 \rarr B = \frac{\sum x_{i}y_{i}}{\sum x_{i}^2} ; \ \ \sigma_{B} = \frac{\sigma_{y}}{\sqrt{\sum x_{i}^2}} $$
+
+2. **Polinomiale**
+
+$$ y = A +BX +Cx^2 + ... + Hx^n \\ caso \ scelto: forma \ quadratica \rarr y= A+ Bx +Cx^2$$
+
+$$ \chi^2 = \sum \frac{-(y_{i}-A-Bx_{i}-Cx_{i}^2)^2}{\sigma_{y}^2} $$
+
+Che differenziato nelle variabili A, B e C, e poste le derivate = 0 restituisce il sistema:
+
+$$ AN + B\sum x +C\sum x^2 = \sum y \\
+A \sum x + B \sum x^2 +C \sum x^3 = \sum xy \\
+A \sum x^2 + B \sum x^3 +C \sum x^4 = \sum x^2y 
+$$
+
+Da cui è possibile ricavarsi i valori di A, B e C e le relative incertezze, cosa che non è mai stata fatta in pratica durante il corso, ma sapresti come procedere eventualmente.
+
+3. **Esponenziale**
+
+$$ y = Ae^{Bx} $$
+
+Questo caso appare leggermente più complicato in quanto l'equazione non è lineare, ma possiamo ricondurci al caso lineare facilmente, con una semplice sostituzione:
+
+$$ z = ln(y) = ln(A) + Bx \rarr \chi^2 = \sum\frac{-(z_{i}-ln(A)-Bx_{i})}{\sigma_{z}^2} \\ con \ \sigma_{z} = |\frac{\partial{z}}{\partial{y}}|\sigma_{y} = \frac{\sigma_{y}}{y} $$
+
+Da qui in poi si possono applicare sulla z le formule per il calcolo di A e B come nel caso lineare, e riportare all'esponente per i valori di y ed A.
+
+Se si considerano i valori di $\sigma_{z}$ variabili va applicato il metodo dei minimi quadrati pesati, altre volte è possibile applicare quello classico dicendo che non si può essere certi che le incertezze sulle y siano costanti, e perciò considerare quelli sulle z costanti, in quanto la variazione nel risultato dovrebbe essere minima.
+Soprattutto se il modo in cui varia l'incertezza sulle y non è noto impiegare il metodo dei minimi quadrati dovrebbe riportare risultati ragionevoli.
+
+4. **Altre funzioni**
+
+Teoricamente è sempre possibile applicare il metodo dei minimi quadrati, anche se i conti potrebbero essere più complicati nel caso di funzioni più complesse o trigonometriche. Detto ciò, è improbabile vengano chiesti.
+
 # Gaussiana con criterio di massima verosimiglianza
+
+
+
 # Errore sulla media e miglior stima (massima verosimiglianza)
 # Formula della varianza
 # Compatibilità tra due misure(+media pesata)
