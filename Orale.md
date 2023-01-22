@@ -17,6 +17,7 @@ Orale di Laboratorio
 * [Formula di bayes](#formula-di-bayes)
 * [Regressione lineare(tutti i casi)](#regressione-lineare-tutti-i-casi)
 * [Coefficiente di correlazione lineare](#coefficiente-di-correlazione-lineare)
+* [Forma della Gaussiana](#forma-della-gaussiana)
 * [Gaussiana con criterio di massima verosimiglianza](#gaussiana-con-criterio-di-massima-verosimiglianza)
 * [Errore sulla media e miglior stima (massima verosimiglianza)](#errore-sulla-media-e-miglior-stima-massima-verosimiglianza)
 * [Formula della varianza](#formula-della-varianza)
@@ -346,6 +347,27 @@ Questa definizione empirica non è logicamente assicurata in quanto niente forza
 
 Dati due eventi A e B, dotati ognuno di una probabilità di verificarsi, dette P(A) e P(B), è possibile calcolare la probabilità che si verifichi una qualunque combinazione degli eventi A e B, secondo le formule di unione ed intersezione.
 
+Di seguito tutte le formule utili al calcolo di probabilità generale:
+
+1. Probabilità $\bar{A}$
+
+$$ P(\bar{A}) = \frac{N-n}{N} = 1- \frac{n}{N} =  1- P(A) $$
+2. Probabilità $P(A \cup  B )$
+
+$$ P(A\cup B) = P(A) + P(B) - P(A\cap B) $$
+Inoltre possiamo dire che $P(A \cup B) \leq P(A) + P(B) $
+
+3. Probabilità $P(A \cap B) $
+
+$$ P(A\cap B) = P(A|B) P(B) = P(B|A)P(A) $$
+
+Con $P(Y|X)$ la probabilità che avvenga Y dato X
+
+Se A e B sono indipendenti $P(A|B)=P(A)$,  da cui $P(A\cap B) = P(A)P(B) $
+
+Per N eventi $A_{i}$ possiamo generalizzare la fomula come:
+
+$$ P(\cap_{i=1}^{N} A_{i}) = \Pi_{i}^{N} P(A_{i}) $$
 
 
 # Formula di bayes
@@ -463,10 +485,69 @@ Soprattutto se il modo in cui varia l'incertezza sulle y non è noto impiegare i
 
 Teoricamente è sempre possibile applicare il metodo dei minimi quadrati, anche se i conti potrebbero essere più complicati nel caso di funzioni più complesse o trigonometriche. Detto ciò, è improbabile vengano chiesti.
 
+
+# Forma della Gaussiana
+
+La Gaussiana, anche detta distribuzione normale, è la PDF (probability density function) più utilizzata nello studio di eventi stocastici, e vedremo che molte altre PDF possono essere approssimate ad essa sotto certe condizioni. La gaussiana è caratterizzata dalla seguente formula:
+
+$$ G_{\mu,\sigma}(x)=\frac{1}{\sqrt{2\pi \sigma}}e^{-(x-\mu)^2/2\sigma^2} $$
+
+Giustifichiamo questa formula considerando la probabilità di ottenere il risultato x partendo da un valore esatto X soggetto ad n effetti casuali che spostano il risultato di un valore a.
+
+$$
+misura \ generica \ x = X + n_{+}a - (n-n_{+})a = X + (2n_{+}-n)a \\
+dove \ n_{+} \ è \ il \ numero \ di \ effetti \ casuali\ positivi \\
+definiamo \ s=2n_{+}-n=n_{+}-{n-n_{+}} \rarr x=X+sa \\
+$$
+
+Esiste una corrispondenza biunivoca tra $n_{+}$, $s$ ed $x$, ovvero:
+
+| $n_{+}$ | $s$ | $x$ |
+|---|---|---|
+| 0 | -n | X-na |
+| n/2 | 0 | X |
+| n | n | X-na |
+
+per cui P(x)=P($n_{+}$)=P(s), per sviluppare il conto conviene utilizzare P($n_{+}$), in quanto è perfettamente descritto nello studio del [random walk](#random-walk):
+
+$$ P(n_{+}) = \frac{n!}{n_{+}!(n-n_{+})!}(\frac{1}{2})^n $$
+
+siccome $n_{+}= \frac{n+s}{2}$ ed  $n-n_{+}=\frac{n-s}{2} $ possiamo sostituire nella formula per ottenere:
+
+$$ P(s) = \frac{n!}{(\frac{n+s}{2})!(\frac{n-s}{2})!}(\frac{1}{2})^n \propto \frac{n!}{(\frac{n+s}{2})!(\frac{n-s}{2})!}  \\ \\
+Per \ l'approssimazione \ di \ Stirling: \ ln(n!) = n*ln(n)-n, \ da \ cui\ \\ \\
+ln(P(s)) = nln(n)-n -(\frac{n+s}{2})ln(\frac{n+s}{2})+(\frac{n+s}{2}) -(\frac{n-s}{2})ln(\frac{n-s}{2})+(\frac{n-s}{2}) = \\ \\
+nln(n) -(\frac{n+s}{2})ln(\frac{n+s}{2}) -(\frac{n-s}{2})ln(\frac{n-s}{2}) = \\ \\
+nln(n) -\frac{n}{2}[ln(\frac{n+s}{2})+ln(\frac{n-s}{2})] - \frac{s}{2}[ln\frac{n+s}{2})-ln(\frac{n-s}{2})] = \\ \\
+nln(n) -\frac{n}{2}[ln(n) + ln(1+\frac{s}{n}) -ln(2) + ln(n) + ln(1-\frac{s}{n}) -ln(2)] - \frac{s}{2}[ln(n) + ln(1+\frac{s}{n}) -ln(2) - ln(n) - ln(1-\frac{s}{n}) +ln(2)] = \\ \\
+-\frac{n}{2}[ln(1+\frac{s}{n})+ln(1-\frac{s}{n})] +nln(2) -\frac{s}{2}[ln(1+\frac{s}{n}) - ln(1-\frac{s}{n})] = \\ \\
+$$
+che per n grandi diventa approssimabile allo sviluppo di Taylor per cui:
+
+$$ ln(1+\frac{s}{n}) \approx \frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2; \ \ \ \ \ \ ln(1-\frac{s}{n}) \approx -\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2  $$
+
+Perciò, sostituendo nell'equazione di sopra:
+
+$$ ln(P(s)) = -\frac{n}{2}[\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2 - \frac{s}{n} + \frac{1}{2}(\frac{s}{n})^2 ] +nln(2) -\frac{s}{2}[\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2+ \frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2] = \\ \\
+\frac{n}{2}(\frac{s}{n})^2+nln(2)-\frac{s}{2}(2\frac{s}{n}) = \\ \\
+ln(2^{n})-\frac{s^2}{2n}
+$$
+
+Riportando il valore ottenuto all'esponente otteniamo:
+
+$$ P(s) = 2^ne^{-(s^2)/2n} $$
+
+Essendo però $s=(x-X)/a$, sostituiamo ed otteniamo:
+
+$$ P(s) = 2^ne^{-(x-X)^2/2na^2} $$
+
+Avendo all'inizio moltiplicato per $2^n$ adesso possiamo semplificare il risultato e dire che:
+
+$$ G(x) \propto e^{-(x-X)^2/2na^2} $$
+
+Se poniamo $\mu$ = X e $\sigma = a\sqrt{n}$ otteniamo la componente esponenziale della formula della gaussiana.
+
 # Gaussiana con criterio di massima verosimiglianza
-
-
-
 # Errore sulla media e miglior stima (massima verosimiglianza)
 # Formula della varianza
 # Compatibilità tra due misure(+media pesata)
@@ -476,6 +557,21 @@ Teoricamente è sempre possibile applicare il metodo dei minimi quadrati, anche 
 # Poissoniana come limite della binomiale
 # Chi quadrato
 # Random walk
+
+Il random walk è un processo essenzialmente casuale, utlizzato nella dimostrazione della [forma della gaussiana](#forma-della-gaussiana). In pratica rappresenta il movimento casuale delle misure distribuite normalmente da una parte o dall'altra del valore medio.
+
+È descritto dalla seguente formula:
+
+$$ P = \frac{n!}{n_{+}!(n-n_{+})!}(\frac{1}{2})^n $$
+
+$$ con \ 0\leq n_{+} \leq n  $$
+
+La formula può essere ricava dalla formula della [distribuzione binomiale](#distribuzione-binomiale-contatori-di-particelle), con probabilità di successo = $\frac{1}{2}$, $n_{+}$ successi su $n$ tentativi. 
+
+A causa della probabilità di successo la distribuzione dei risultati di $x$ secondo gli effetti del random walk è simmetrica, e all'aumentare di $n$ prende sempre più una forma a campana che ricorda quella della Gaussiana (come si è visto nella dimostrazione della forma della gaussiana, quest'ultima è proporzionale alla distribuzione dei risultati secondo un random walk in effetti). 
+
+La formula a cui sto facendo riferimento è: $x = X+n_{+}a-(n-n_{+})a$. La campana avrà centro in $X$ e larghezza proporzionale ad $a$.
+
 # Teorema del limite centrale (+variabili non continue)
 # Somma di due variabili uniformi
 # Fattore di copertura
