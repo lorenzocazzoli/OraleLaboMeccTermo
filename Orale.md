@@ -21,6 +21,7 @@ Orale di Laboratorio
 * [Errore sulla media e miglior stima (massima verosimiglianza)](#errore-sulla-media-e-miglior-stima-massima-verosimiglianza)
 * [Formula della varianza](#formula-della-varianza)
 * [Compatibilità tra due misure(+media pesata)](#compatibilità-tra-due-misuremedia-pesata)
+* [Distribuzione di student](#distribuzione-di-student)
 * [Metodo del rigetto](#metodo-del-rigetto)
 * [Distribuzione binomiale (contatori di particelle)](#distribuzione-binomiale-contatori-di-particelle)
 * [Distribuzione di poisson](#distribuzione-di-poisson)
@@ -92,14 +93,25 @@ Immagine sopra:
 Esempi di effetti di aliasing.
 
 
-# Discrepanza tra misure della stessa u.m.
+# Confronto tra misure della stessa u.m.
 
 Date due misure dello stesso valore, la discrepanza è la differenza tra di esse.
 Date due misure, `X` ed `Y`, con relativi errori $\sigma_{x}$ e $\sigma_{y}$, le misure sono compatibili, ovvero hanno *discrepanza non significativa* se:
 
-$$ max|X+$\sigma_{x}$, Y+\sigma_{y}| \geq min|X-$\sigma_{x}$, Y-\sigma_{y}| $$
+$$ max|X+\sigma_{x}, Y+\sigma_{y}| \geq min|X-\sigma_{x}, Y-\sigma_{y}| $$
 
 Lo stesso procedimento può essere applicato anche per misure appurate, o per misure il cui sigma è ottenuto per propagazione degli errori.
+
+Per uno studio più accurato è possibile effettuare uno studio della probabilità che la differenza dei valori sia compatibile con 0.
+
+Se i due campioni sono gaussiani la differenza dei due è anch'essa distribuita normalmente con larghezza la sigma ottenuta per somma in quadratura.
+Il valore a cui applicare lo studio di probabilità è `z`, ottenuto come:
+
+$$ z = \frac{\bar{x_{1}} - \bar{x_{2}}}{\sqrt{S_{\bar{x_{1}}}^2 + S_{\bar{x_{2}}}^2}} $$
+
+Se la probabilità che il valore assoluto di z sia maggiore di quella ottenuta è minore di `5%` sussiste una **discrepanza significativa**, se invece è minore di `1%` sussiste una **discrepanza altamente significativa**.
+
+Per la giustificazione di questo metodo, fare riferimento a [Intervallo e livello di confidenza, ovvero student](#distribuzione-di-student)
 
 # Propagazione delle incertezze (anche binomiale)
 
@@ -316,9 +328,23 @@ Per ottenere il numero di misure attese data la probabilità di $z > z_{0}$ molt
 
 # Descrivere la probabilità
 
+La probabilità è un concetto relativamente sfuggente, che noi abbiamo definito in tre modi diversi, due pratici ma logicamente imperfetti, uno logicamente solido ma impossibile da mettere in pratica.
 
+1. Rapporto di casi favorevoli e possibili
+> Dati r casi favorevoli all'avverarsi dell'evento A ed R casi possibili possiamo definire la probabilità di A come il rapporto dei casi favorevoli e quelli possibili, ovvero r/R, a patto che ogni caso sia equamente probabile.
+Questa è una definizione a priori, attuabile solamente se tutti i casi sono equamente probabili, è utile per lo studio di probabilità quali quelle del risultato mostrato da una faccia di un dado.
+2. Definizione empirica
+> La probabilità che l'evento A si verifichi è uguale al limite per N tendente ad infinito della frequenza di A, ovvero il numero di casi in cui A si verifica (n) sul numero di campionamenti totali (N)
+Questa definizione empirica non è logicamente assicurata in quanto niente forza il limite a tendere ad un numero ben definito.
+3. Definizione assiomatica
+> Si definisce probabilità di un evento casuale A un numero P(A) associato univocamente all'evento stesso che soddisfi tre requisiti:
+> 1. P(A) $\leq$ 0 qualunque sia A
+> 2. P(S) = 1 con S un evento certo, o l'unione di tutti gli eventi possibili
+> 3. P(A1 U A2 U A3 ...) = P(A1) + P(A2) + P(A3) ... se l'intersezione tra gli eventi A1-3 è nulla
 
 # Probabilità di somma e intersezione di due eventi
+
+Dati due eventi A e B 
 
 # Formula di bayes
 
@@ -341,6 +367,7 @@ Ora non resta che dire che, se la probabilità complessiva che avvenga E sia la 
 # Errore sulla media e miglior stima (massima verosimiglianza)
 # Formula della varianza
 # Compatibilità tra due misure(+media pesata)
+# Distribuzione di Student
 # Distribuzione binomiale (contatori di particelle)
 # Distribuzione di poisson
 # Poissoniana come limite della binomiale
