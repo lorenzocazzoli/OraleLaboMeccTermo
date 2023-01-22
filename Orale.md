@@ -197,7 +197,7 @@ $$ P(x+y,z) \propto exp(-\frac{(x+y)^2}{2(\sigma_{x}^2+\sigma_{y}^2)}) exp(-\fra
 
 per ottenere una probabilità di `x + y` a prescindere da `z` si integra su `z`:
 
-$$ \int_{-\infty}^{+\infty} P(x+y,z)\ dx = P(x+y)*\sqrt{2\pi}  $$
+$$ \int_{-\infty}^{+\infty} P(x+y,z)\ dz = P(x+y)*\sqrt{2\pi}  $$
 
 Da cui i valori di `x+y` sono distribuiti normalmente con larghezza:
 
@@ -250,17 +250,73 @@ Con $\sigma_{xy}$ come valore di **covarianza**, ovvero:
 
 $$ \sigma_{xy} = \frac{1}{N} \sum_{i}(x_{i}-\bar{x})(y_{i}-\bar{y}) $$
 
-completare con la dimostrazione del Taylor
+Se i valori `x` ed `y` sono indipendenti, per `N` tendenti ad $\infty$, la covarianza tenderà a 0, se **non** sono indipendenti avrà un valore che ci dà informazioni riguardo il tipo di correlazione.
+Se $\sigma_{xy} > 0 \rarr x \propto y$, mentre se $\sigma_{xy} < 0 \rarr x \propto y^{-1}$  
+
+## Due possibili dimostrazioni della Covarianza
+
+### Taylor (con la varianza, p.213)
+ 
+$$ Varianza \ = \sigma_{q}^2 = \frac{1}{N} \sum (q_{i}-\bar{q})^2 $$
+$$ q_{i} = q(x_{i},y_{i}) \ che \ per \ approssimazione \ lineare \ di \ q \ per \ (x_{i}-\bar{x}) \ piccoli: \ 
+q_{i} \approx q(\bar{x}, \bar{y}) + \frac{\partial{q}}{\partial{x}}(x_{i}-\bar{x}) + \frac{\partial{q}}{\partial{y}}(y_{i}-\bar{y}) $$
+$$ \bar{q} = \frac{1}{N}\sum_{i}^{N}q_{i}, \ sostituendo \ la \ formula \ sopra: \ \bar{q} = q(\bar{x}, \bar{y}), \ siccome \ gli \ altri \ termini \ si \ annullano. \ (dalla \ def. \ di \ \bar{x} \ segue \ che: \ \sum(x_{i} - \bar{x}) = 0) $$
+
+Sostituendo le ultime due equazioni nella formula della varianza otteniamo che:
+
+$$ \sigma_{q}^2 = \frac{1}{N}\sum[\frac{\partial{q}}{\partial{x}}(x_{i}-\bar{x}) + \frac{\partial{q}}{\partial{y}}(y_{i}-\bar{y}]^2 $$
+$$ = (\frac{\partial{q}}{\partial{x}})^2 \frac{1}{N} \sum(x_{i}-\bar{x})^2 + (\frac{\partial{q}}{\partial{y}})^2 \frac{1}{N} \sum(y_{i}-\bar{y})^2 + 2\frac{\partial{q}}{\partial{x}}\frac{\partial{q}}{\partial{y}}\sum(x_{i}-\bar{x})(y_{i}-\bar{y}) $$
+
+Adesso, i primi due termini sono per definizione i valori $\sigma_{x}$ e $\sigma_{y}$, mentre il terzo è proprio il valore della covarianza.
+
+### Con deviazione standard massima
+
+Considerando i risultati ottenuti nella dimostrazione della somma in quadratura, possiamo dire che il valore massimo della deviazione standard sia = alla somma degli errori, ovvero alla somma delle derivate parziali della nostra `q`, ognuna di esse moltiplicata per il valore dell'errore sulla variabile di derivazione:
+
+$$ \sigma_{q} \leq \frac{\partial{q}}{\partial{x}}\sigma_{x} + \frac{\partial{q}}{\partial{y}}\sigma_{y} $$
+
+Non ci rimane che elevare al quadrato per ottenere la varianza:
+
+$$ \sigma_{q}^2 \leq (\frac{\partial{q}}{\partial{x}}\sigma_{x})^2 + (\frac{\partial{q}}{\partial{y}}\sigma_{y})^2 + 2\frac{\partial{q}}{\partial{x}}\frac{\partial{q}}{\partial{y}}\sigma_{x}\sigma_{y} $$
+
+Adesso, per la **Disuguaglianza di Schwartz**, $\sigma_{x}\sigma_{y}$ è proprio il valore massimo di $|\sigma_{xy}|$, se questa è definita come abbiamo detto all'inizio del paragrafo.
+Possiamo sostituirla ed abbiamo il nostro risultato, come per la [dimostrazione del Taylor](#taylor-con-la-varianza-p213).
 
 # Coefficiente di correlazione lineare
 
-guarda slide ottava settimana per riscrivere
+Il **coefficiente di correlazione lineare**, `r`, è un valore adimensionale compreso tra -1 ed 1, che indica quanto due valori sono correlati da una relazione funzionale (in particolare lineare). 
+`r` è definito come:
+
+$$ r = \frac{\sigma_{xy}}{\sigma{x}\sigma_{y}} = \frac{\sum(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sqrt{\sum(x_{i}-\bar{x})^2*\sum(y_{i}-\bar{y})^2}} $$
+
+## dimostrazione del dominio di r
+
+essendo $|\sigma_{xy}| \leq \sigma_{x}\sigma_{y}$ il loro rapporto è al massimo 1 ed al minimo -1.
+
+In alternativa, considerando una `y` ottenuta in funzione di `x` secondo una correlazione lineare possiamo ottenere che `r` sarà = $\pm 1$:
+
+$$ y_{i} = A + Bx_{i} \rarr \bar{y} = A + B\bar{x} $$
+
+$$ r = \frac{\sum(x_{i}-\bar{x})(A+Bx_{i}-A+B\bar{x})}{\sqrt{\sum(x_{i}-\bar{x})^2*\sum(A+Bx_{i}-A+B\bar{x})^2}} = 
+\frac{B\sum(x_{i}-\bar{x})^2}{|B|\sqrt{\sum(x_{i}-\bar{x})^2}} = \frac{B}{|B|} = \pm 1 $$
+
+Per decretare la significatività di una correlazione lineare, si può studiare la probabilità che un `r` sia maggiore di `|r|` dato `N`, secondo una distribuzione particolare data dalla formula (non richiesta nell'orale):
+
+$$ P_{N}(|r|>|r_{0}|) = \frac{2\Gamma[(N-1)/2]}{\sqrt{\pi}\Gamma[(N-2)/2]}\int_{|r_{0}|}^{1} (1-r^2)^{(N-4)/2} dr $$
+
+Se la probabilità di `r` maggiori è minore del `5%` la correlazione è **significativa**, se è minore dell'`1%` è **altamente significativa**. 
 
 # Metodo del rigetto
 
-guarda slide ottava settimana per riscrivere
+È possibile, in un campione di dati distribuiti normalmente (secondo una distribuzione Gaussiana), rigettare dati altamente improbabili secondo il **Criterio di Chauvenet**, che dice:
+
+> Se il numero atteso di misure improbabili, cioè misure che distano dalla media più di z variazioni standard (con z = (Xsospetta - Xbest)/sigma) è minore di 0.5, la misura può essere rigettata
+
+Per ottenere il numero di misure attese data la probabilità di $z > z_{0}$ moltiplicare tale probabilità per il numero di campioni. 
 
 # Descrivere la probabilità
+
+
 
 # Probabilità di somma e intersezione di due eventi
 
