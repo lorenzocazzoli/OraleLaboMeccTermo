@@ -548,9 +548,55 @@ $$ G(x) \propto e^{-(x-X)^2/2na^2} $$
 Se poniamo $\mu$ = X e $\sigma = a\sqrt{n}$ otteniamo la componente esponenziale della formula della gaussiana.
 
 # Gaussiana con criterio di massima verosimiglianza
+
+Dato un campione di `n` dati distribuiti normalmente $x_{1}...x_{n}$, qual'è la stima migliore che possiamo fare dei parametri $\mu$ e $\sigma$?
+
+> Le stime migliori sono quelle che rendono massima la probabilità di uscita del campione dato
+
+$$ P(x_{1}) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x_{i}-X)^2/2\sigma^2}\Delta x $$
+
+$$ P(x_{1},...,x_{n}) = \Pi_{i=1}^{n} \frac{1}{\sqrt{2\pi}\sigma} e^{-(x_{i}-X)^2/2\sigma^2}\Delta x $$
+
+$$ P \propto \frac{1}{\sigma^{n}}e^{-(\sum (x_{i}-\mu)^2)/2\sigma^2} $$ 
+
+Le costanti non sono considerate in quanto al massimo non cambia in base ad esse.
+
+$$ L = ln(P) = -n*ln(\sigma) - \sum \frac{(x_{i}-\mu)^2}{2\sigma^2} $$
+
+Studiamo la forma logaritmica per convenienza, siccome per lo studio del massimo ciò che massimizza P massimizza anche il suo logaritmo.
+
+Per ottenere il massimo di L, lo deriviamo e poniamo il risultato =0, per le variabili $\mu$ e $\sigma$:
+
+$$ \frac{\partial{L}}{\partial{\mu}} = -\frac{2}{2\sigma^2} \sum (x_{i}- \mu) = 0 \longleftrightarrow \sum (x_{i}-\mu) = 0 \\ \\ 
+\sum x_{i} - \mu N = 0 \rarr \mu=\frac{\sum x}{N} = \bar{x}
+$$
+
+$$ \frac{\partial{L}}{\partial{\sigma}} = -\frac{N}{\sigma} -\frac{1}{2}\sum (x_{i}-\mu)^2 * (-\frac{2}{\sigma^3}) = 0 \\ \\
+-N -\frac{1}{2}\sum (x_{i}-\mu)^2 * (-\frac{2}{\sigma^2}) = 0 \\ \\
+-N +\frac{\sum (x_{i}-\mu)^2}{\sigma^2} = 0 \\ \\
+\sigma = \sqrt{\frac{\sum (x_{i}-\mu)^2}{N}} \\ sapendo \ che \ \mu = \bar{x}: \\ \\
+\sigma = \sqrt{\frac{\sum (x_{i}-\bar{x})^2}{N}}
+$$
+
+Se adeguiamo la formula ad un campione di dati, su cui è possibile calcolare $\sigma$ (l'errore su una sola misura non può essere calcolato da un campione randomico, perché lo **scarto quadratico** è = 0), adeguiamo la formula in tal modo:
+
+$$ \sigma = \sqrt{\frac{\sum (x_{i}-\bar{x})^2}{N}} $$
+
 # Errore sulla media e miglior stima (massima verosimiglianza)
 # Formula della varianza
 # Compatibilità tra due misure(+media pesata)
+# Distribuzione di probabilità di variabili casuali (PDF)
+
+Le PDF (probability density function) sono funzioni che descrivono la probabilità di ottenere un dato valore estraendo una variable casuale distribuita secondo la suddetta funzione.
+
+Su un asse sono rappresentati i valori ottenibili, sull'altro la frequenza del valore corrispondente. Le u.m. sono perciò $[x]$ per le ascisse e $[x^-1]$ per le ordinate.
+
+Le PDF hanno peculiari caratteristiche dovute al fatto che rappresentano probabilità. Sono le seguenti:
+
+1. $\int_{-\infty}^{+\infty} f(x)=1 $ a causa della definizione di probabilità di un evento certo (la probabilità che un valore vada da + a - infinito è l'unione delle probabilità di ogni valore possibile, perciò trattasi di un evento certo)
+2. $\bar{x} = \int_{-\infty}^{+\infty} x *f(x) dx$ essendo il valore medio la sommatoria di ogni valore ottenuto per la frazione di volte in cui è stato ottenuto, se portiamo nei continui questo concetto si tratta dell'integrale appena desccritto.
+3. $S_{x}^2 = \int_{-\infty}^{+\infty} (x-\bar{x})^2f(x)dx \rarr S_{x}^2=(\bar{x^2} - \bar{x}^2) = \frac{1}{N}\sum (x_{i}-\bar{x})^2 $ ovvero che la varianza è la media degli scarti quadratici, o la differenza tra la media del quadrato ed il quadrato della media. 
+
 # Distribuzione di Student
 # Distribuzione binomiale (contatori di particelle)
 # Distribuzione di poisson
