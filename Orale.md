@@ -30,7 +30,6 @@ Orale di Laboratorio
 * [Chi quadrato](#chi-quadrato)
 * [Random walk](#random-walk)
 * [Teorema del limite centrale (+variabili non continue)](#teorema-del-limite-centrale-variabili-non-continue)
-* [Somma di due variabili uniformi](#somma-di-due-variabili-uniformi)
 * [Fattore di copertura](#fattore-di-copertura)
 * [Esperimenti](#esperimenti)
 
@@ -599,6 +598,33 @@ Le PDF hanno peculiari caratteristiche dovute al fatto che rappresentano probabi
 
 # Distribuzione di Student
 # Distribuzione binomiale (contatori di particelle)
+
+La distribuzione binomiale è una funzione rappresentante la probabilità di ottenere $k$ successi su $n$ tentativi, avendo $p$ probabilità di successo per ogni tentativo.
+
+È calcolata secondo la teoria della probabilità, in particolare delle combinazioni.
+
+$$ P_{p,n}(k) = \binom{n}{k} p^k (1-p)^{n-k} $$
+
+Dove $\binom{n}{k}$ è il coefficiente binomiale, descritto dalla seguente equazione:
+
+$$ \binom{n}{k} = \frac{n!}{n!(n-k)!} $$
+
+La binomiale è ottenuta semplicemente considerando l'intersezione degli eventi richiesti:
+* k volte l'avverarsi di p ($ p^k $)
+* n-k il non avverarsi di p ($ (1-p)^{n-k} $)
+* le combinazioni di eventi che portano a k successi su n tentativi, ovvero $\binom{n}{k}$
+
+Come tutte le PDF, la binomiale è normalizzata a 1.
+
+Altri dati potenzialmente utili sono:
+
+* media di k ($\bar{k}$) = $np$
+* varianza $\sigma_{k}^2 = np(1-p)$
+* la distribuzione è simmetrica attorno a $\bar{k}$ se e solo se p=0.5
+* la binomiale tende ad una forma a campana, approssimabile ad una gaussiana, per grandi valori di n
+
+Altra curiosità: la distribuzione poissoniana è ottenibile come [limite della binomiale](#poissoniana-come-limite-della-binomiale)
+
 # Distribuzione di poisson
 # Poissoniana come limite della binomiale
 # Chi quadrato
@@ -619,6 +645,5 @@ A causa della probabilità di successo la distribuzione dei risultati di $x$ sec
 La formula a cui sto facendo riferimento è: $x = X+n_{+}a-(n-n_{+})a$. La campana avrà centro in $X$ e larghezza proporzionale ad $a$.
 
 # Teorema del limite centrale (+variabili non continue)
-# Somma di due variabili uniformi
 # Fattore di copertura
 # Esperimenti
