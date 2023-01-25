@@ -581,7 +581,34 @@ Se adeguiamo la formula ad un campione di dati, su cui è possibile calcolare $\
 
 $$ \sigma = \sqrt{\frac{\sum (x_{i}-\bar{x})^2}{N}} $$
 
-# Errore sulla media e miglior stima (massima verosimiglianza)
+# Errore sulla media e miglior stima
+
+## Secondo il Taylor
+
+Avendo $n$ misure $x$ distribuite normalmente attorno alla media $\mu$ con una larghezza $\sigma_{x}$, per ottenere l'errore sulla media procediamo in questo modo:
+consideriamo di avere diverse volte la misura della media di N misure, ogni volta la media è calcolata come:
+
+$$ \bar{x} = \frac{x_{1}+...+x_{N}}{N} $$
+
+siccome la media è calcolata come funzione delle N misure possiamo calcolarne l'errore secondo le formule della propagazione degli errori. Abbiamo una sola particolarità per questo calcolo, ovvero che tutte le N misure sono distribuite normalmente con lo stesso valore vero $\mu$ e la stessa larghezza $\sigma_{x}$.
+Per prima cosa possiamo dedurre che anche $\bar{x}$ sarà distribuita normalmente, come per la somma di distribuzioni, ed avrà come valore vero:
+
+$$ \frac{\mu+...+\mu}{N} = \mu $$
+
+perciò i nostri risultati della media saranno distribuiti attorno al valore $\mu$.
+
+La larghezza della distribuzioneè un attimo più complicata da ottenere, ma possiamo sempre ricorrere alla propagazione degli errori:
+
+$$ \sigma_{\bar{x}} = \sqrt{(\frac{\partial{\bar{x}}}{\partial{x_{1}}}\sigma_{x_{1}})^2+...+(\frac{\partial{\bar{x}}}{\partial{x_{N}}}\sigma_{x_{N}})^2} $$
+
+siccome tutte le derivate parziali della media sono uguali a $\frac{1}{N}$ e tutte le $\sigma$ sono uguali tra loro possiamo semplificare la formula alla seguente forma:
+
+$$ \sigma_{\bar{x}} = \sqrt{\sum (\frac{1}{N}\sigma_{x})^2} = \sqrt{\frac{N\sigma_{x}^2}{N^2}} = \frac{\sigma_{x}}{\sqrt{N}} $$
+
+## Secondo Cuffiani
+
+
+
 # Formula della varianza
 # Compatibilità tra due misure(+media pesata)
 # Distribuzione di probabilità di variabili casuali (PDF)
