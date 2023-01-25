@@ -624,6 +624,36 @@ Le PDF hanno peculiari caratteristiche dovute al fatto che rappresentano probabi
 3. $S_{x}^2 = \int_{-\infty}^{+\infty} (x-\bar{x})^2f(x)dx \rarr S_{x}^2=(\bar{x^2} - \bar{x}^2) = \frac{1}{N}\sum (x_{i}-\bar{x})^2 $ ovvero che la varianza è la media degli scarti quadratici, o la differenza tra la media del quadrato ed il quadrato della media. 
 
 # Distribuzione di Student
+
+Per un insieme di misure distribuite normalmente possiamo ricavare tramite il criterio della massima verosomiglianza (minimi quadrati nel taylor) i valori di media ed il suo errore, ovvero $\bar{x}$ e $\sigma_{\bar{x}}$.
+Però qual'è la probabilità che il valore vero $\mu$ sia contenuto all'interno di un intervallo centrato in $\bar{x}$ largo $k\sigma_{\bar{x}}$?
+
+L'intervallo $[\sigma_{\bar{x}}-k;\sigma_{\bar{x}}+k]$ sarà detto `intervallo di confidenza`, la probabilità che $\mu$ vi sia compreso `livello di confidenza` e k `fattore di copertura`.
+
+Per il calcolo del livello di confidenza ci si affida, soprattutto per campioni di poche misure, ad una distribuzione detta `Distribuzione di Student`, definita dalla formula:
+
+$$ S_{v}(t) = c_{\nu}/(1+\frac{t^2}{\nu})^{\frac{\nu+1}{2}} $$
+
+con $c_{v}$ un coefficiente definito in base alla [$\Gamma$](https://en.wikipedia.org/wiki/Gamma_function) e $\nu$ definito come $N-1$.
+
+È da notare in particolare che la distribuzione di Student per n elevati (sopra i 30 è già accettabile) tende alla forma di una Gaussiana.
+
+Il nostro studio di probabilità per il livello di confidenza è fatto con lo studio di un coefficiente $t$, detta variabile di student, definita come:
+
+$$ t=\frac{\bar{x}-\mu}{\sigma_{\bar{x}}} $$
+
+La probabilità, ovvero il livello di confidenza, è la probabilità che $|t|$ sia **minore** di k, il fattore di copertura(in formula $P_{\nu}(|t|<k)=\int_{-k}^{k} S_{v}(t)dt$).
+
+È possibile anche fare riferimento ad una seconda tabella di probabilità secondo la distribuzione di student, dove in funzione del livello di confidenza e $\nu$ si ottiene il fattore di copertura necessario.
+
+Sotto: tabella dei livelli di confidenza in base a $\nu$ e k
+
+![immagine](Screenshot_2023-01-25_17-16-01.png) 
+
+Sotto: tabella di k in base a $\nu$ e livello di confidenza richiesto.
+
+![immagine2](Screenshot_2023-01-25_17-16-19.png)
+
 # Distribuzione binomiale (contatori di particelle)
 
 La distribuzione binomiale è una funzione rappresentante la probabilità di ottenere $k$ successi su $n$ tentativi, avendo $p$ probabilità di successo per ogni tentativo.
@@ -653,6 +683,9 @@ Altri dati potenzialmente utili sono:
 Altra curiosità: la distribuzione poissoniana è ottenibile come [limite della binomiale](#poissoniana-come-limite-della-binomiale)
 
 # Distribuzione di poisson
+
+
+
 # Poissoniana come limite della binomiale
 # Chi quadrato
 # Random walk
