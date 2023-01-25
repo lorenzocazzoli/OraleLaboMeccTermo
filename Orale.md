@@ -611,6 +611,22 @@ $$ \sigma_{\bar{x}} = \sqrt{\sum (\frac{1}{N}\sigma_{x})^2} = \sqrt{\frac{N\sigm
 
 # Formula della varianza
 # Compatibilità tra due misure(+media pesata)
+
+La miglior stima di un valore vero X a partire da due misure $(x_{1} \pm \sigma_{1})$ e $(x_{2} \pm \sigma_{2})$ compatibili fra loro è la media pesata $x_{p}$, il cui valore è dato dalla formula seguente:
+
+$$ x_{p} = \frac{w_{1} * x_{1} + w_{2} * x_{2}}{w_{1} + w_{2}} $$
+
+dove $w_{1}$ e $w_{2}$ sono i pesi relativi alle rispettive misure $x_{1}$ e $x_{2}$ e sono calcolati come $w_{i} = \frac{1}{\sigma_{x_{1}}^2}$.
+L'incertezza associata alla media pesata è invece:
+
+$$ \sigma_{p} = \frac{1}{\sqrt{w_{1} + w_{2}}} $$
+
+Generalizzando il concetto di media pesata a n misure otteniamo le formule:
+
+$$ x_{p} = \frac{\sum_{i}{w_{i} * x_{i}}}{\sum_{i}{w_{i}}} $$
+
+$$ \sigma_{p} = \frac{1}{\sqrt{\sum_{i}{w_{i}}}} $$
+
 # Distribuzione di probabilità di variabili casuali (PDF)
 
 Le PDF (probability density function) sono funzioni che descrivono la probabilità di ottenere un dato valore estraendo una variable casuale distribuita secondo la suddetta funzione.
@@ -619,7 +635,7 @@ Su un asse sono rappresentati i valori ottenibili, sull'altro la frequenza del v
 
 Le PDF hanno peculiari caratteristiche dovute al fatto che rappresentano probabilità. Sono le seguenti:
 
-1. $\int_{-\infty}^{+\infty} f(x)=1 $ a causa della definizione di probabilità di un evento certo (la probabilità che un valore vada da + a - infinito è l'unione delle probabilità di ogni valore possibile, perciò trattasi di un evento certo)
+1. $\int_{-\infty}^{+\infty} f(x)=1$ a causa della definizione di probabilità di un evento certo (la probabilità che un valore vada da + a - infinito è l'unione delle probabilità di ogni valore possibile, perciò trattasi di un evento certo)
 2. $\bar{x} = \int_{-\infty}^{+\infty} x *f(x) dx$ essendo il valore medio la sommatoria di ogni valore ottenuto per la frazione di volte in cui è stato ottenuto, se portiamo nei continui questo concetto si tratta dell'integrale appena desccritto.
 3. $S_{x}^2 = \int_{-\infty}^{+\infty} (x-\bar{x})^2f(x)dx \rarr S_{x}^2=(\bar{x^2} - \bar{x}^2) = \frac{1}{N}\sum (x_{i}-\bar{x})^2 $ ovvero che la varianza è la media degli scarti quadratici, o la differenza tra la media del quadrato ed il quadrato della media. 
 
