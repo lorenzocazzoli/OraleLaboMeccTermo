@@ -511,26 +511,31 @@ per cui P(x)=P($n_{+}$)=P(s), per sviluppare il conto conviene utilizzare P($n_{
 
 $$ P(n_{+}) = \frac{n!}{n_{+}!(n-n_{+})!}(\frac{1}{2})^n $$
 
-siccome $n_{+}= \frac{n+s}{2}$ ed  $n-n_{+}=\frac{n-s}{2} $ possiamo sostituire nella formula per ottenere:
+siccome $n_{+}= \frac{n+s}{2}$ ed  $n-n_{+}=\frac{n-s}{2}$ possiamo sostituire nella formula per ottenere:
 
-$$ P(s) = \frac{n!}{(\frac{n+s}{2})!(\frac{n-s}{2})!}(\frac{1}{2})^n \propto \frac{n!}{(\frac{n+s}{2})!(\frac{n-s}{2})!}  \\ \\
-Per \ l'approssimazione \ di \ Stirling: \ ln(n!) = n*ln(n)-n, \ da \ cui\ \\ \\
-ln(P(s)) = nln(n)-n -(\frac{n+s}{2})ln(\frac{n+s}{2})+(\frac{n+s}{2}) -(\frac{n-s}{2})ln(\frac{n-s}{2})+(\frac{n-s}{2}) = \\ \\
-nln(n) -(\frac{n+s}{2})ln(\frac{n+s}{2}) -(\frac{n-s}{2})ln(\frac{n-s}{2}) = \\ \\
-nln(n) -\frac{n}{2}[ln(\frac{n+s}{2})+ln(\frac{n-s}{2})] - \frac{s}{2}[ln\frac{n+s}{2})-ln(\frac{n-s}{2})] = \\ \\
-nln(n) -\frac{n}{2}[ln(n) + ln(1+\frac{s}{n}) -ln(2) + ln(n) + ln(1-\frac{s}{n}) -ln(2)] - \frac{s}{2}[ln(n) + ln(1+\frac{s}{n}) -ln(2) - ln(n) - ln(1-\frac{s}{n}) +ln(2)] = \\ \\
--\frac{n}{2}[ln(1+\frac{s}{n})+ln(1-\frac{s}{n})] +nln(2) -\frac{s}{2}[ln(1+\frac{s}{n}) - ln(1-\frac{s}{n})] = \\ \\
-$$
+$$P(s) = \frac{n!}{(\frac{n+s}{2})!(\frac{n-s}{2})!}(\frac{1}{2})^n \propto \frac{n!}{(\frac{n+s}{2})!(\frac{n-s}{2})!}$$
+
+$$Per \ l'approssimazione \ di \ Stirling: \ ln(n!) = n*ln(n)-n, \ da \ cui\$$
+
+$$ln(P(s)) = nln(n)-n -(\frac{n+s}{2})ln(\frac{n+s}{2})+(\frac{n+s}{2}) -(\frac{n-s}{2})ln(\frac{n-s}{2})+(\frac{n-s}{2}) =$$
+
+$$nln(n) -(\frac{n+s}{2})ln(\frac{n+s}{2}) -(\frac{n-s}{2})ln(\frac{n-s}{2}) =$$
+
+$$nln(n) -\frac{n}{2}[ln(\frac{n+s}{2})+ln(\frac{n-s}{2})] - \frac{s}{2}[ln\frac{n+s}{2})-ln(\frac{n-s}{2})] =$$
+
+$$nln(n) -\frac{n}{2}[ln(n) + ln(1+\frac{s}{n}) -ln(2) + ln(n) + ln(1-\frac{s}{n}) -ln(2)] - \frac{s}{2}[ln(n) + ln(1+\frac{s}{n}) -ln(2) - ln(n) - ln(1-\frac{s}{n}) +ln(2)] =$$
+
+$$-\frac{n}{2}[ln(1+\frac{s}{n})+ln(1-\frac{s}{n})] +nln(2) -\frac{s}{2}[ln(1+\frac{s}{n}) - ln(1-\frac{s}{n})] =$$
+
 che per n grandi diventa approssimabile allo sviluppo di Taylor per cui:
 
-$$ ln(1+\frac{s}{n}) \approx \frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2; \ \ \ \ \ \ ln(1-\frac{s}{n}) \approx -\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2  $$
+$$ln(1+\frac{s}{n}) \approx \frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2; \ \ \ \ \ \ ln(1-\frac{s}{n}) \approx -\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2$$
 
 Perciò, sostituendo nell'equazione di sopra:
 
-$$ ln(P(s)) = -\frac{n}{2}[\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2 - \frac{s}{n} + \frac{1}{2}(\frac{s}{n})^2 ] +nln(2) -\frac{s}{2}[\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2+ \frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2] = \\ \\
+$$ln(P(s)) = -\frac{n}{2}[\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2 - \frac{s}{n} + \frac{1}{2}(\frac{s}{n})^2 ] +nln(2) -\frac{s}{2}[\frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2+ \frac{s}{n} - \frac{1}{2}(\frac{s}{n})^2] = \\ \\
 \frac{n}{2}(\frac{s}{n})^2+nln(2)-\frac{s}{2}(2\frac{s}{n}) = \\ \\
-ln(2^{n})-\frac{s^2}{2n}
-$$
+ln(2^{n})-\frac{s^2}{2n}$$
 
 Riportando il valore ottenuto all'esponente otteniamo:
 
